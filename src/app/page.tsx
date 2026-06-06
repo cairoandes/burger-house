@@ -46,11 +46,11 @@ export default function Home() {
 
       <Divider color="red" />
 
-      {/* Destacados - rojo - LIGHT */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(180deg, #f5f2ed 0%, #fef2f2 30%, #fef2f2 70%, #f5f2ed 100%)" }}>
-        <div className="absolute top-1/2 right-0 w-[700px] h-[700px] rounded-full blur-3xl" style={{ background: "radial-gradient(circle, rgba(239,68,68,0.12), transparent 55%)", transform: "translate(40%, -50%)" }} />
-        <div className="absolute top-0 left-1/4 w-[400px] h-[400px] rounded-full blur-3xl" style={{ background: "radial-gradient(circle, rgba(239,68,68,0.08), transparent 55%)" }} />
-        <FeaturedProducts />
+      {/* Destacados - rojo - DARK */}
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(180deg, #0a0a0a 0%, #1a0808 30%, #1a0808 70%, #0a0a0a 100%)" }}>
+        <div className="absolute top-1/2 right-0 w-[700px] h-[700px] rounded-full blur-3xl" style={{ background: "radial-gradient(circle, rgba(239,68,68,0.2), transparent 55%)", transform: "translate(40%, -50%)" }} />
+        <div className="absolute top-0 left-1/4 w-[400px] h-[400px] rounded-full blur-3xl" style={{ background: "radial-gradient(circle, rgba(239,68,68,0.12), transparent 55%)" }} />
+        <FeaturedProducts dark />
       </section>
 
       <Divider color="green" />

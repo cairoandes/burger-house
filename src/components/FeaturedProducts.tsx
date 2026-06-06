@@ -34,18 +34,18 @@ const categoryEmoji: Record<string, string> = {
   especiales: "🌭",
 };
 
-function ProductCard({ product, onSelect }: { product: Product; onSelect: (p: Product) => void }) {
+function ProductCard({ product, onSelect, dark = false }: { product: Product; onSelect: (p: Product) => void; dark?: boolean }) {
   const color = categoryColorMap[product.category] || "#f5a623";
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="group relative bg-surface rounded-3xl border border-border transition-all duration-500 overflow-hidden card-hover"
+      className={`group relative rounded-3xl border transition-all duration-500 overflow-hidden card-hover ${dark ? "bg-white/5 border-white/10" : "bg-surface border-border"}`}
       style={{ borderColor: `${color}10` }}
     >
       {/* Image */}
-      <div className="relative h-48 md:h-56 overflow-hidden flex items-center justify-center" style={{ background: `radial-gradient(circle at 50% 50%, ${color}08, transparent 70%)` }}>
+      <div className="relative h-48 md:h-56 overflow-hidden flex items-center justify-center" style={{ background: dark ? `radial-gradient(circle at 50% 50%, ${color}12, transparent 70%)` : `radial-gradient(circle at 50% 50%, ${color}08, transparent 70%)` }}>
         <FoodBadge emoji={categoryEmoji[product.category] || "🍔"} size="xl" accentColor={color} />
 
         {/* Tags */}
@@ -73,13 +73,13 @@ function ProductCard({ product, onSelect }: { product: Product; onSelect: (p: Pr
         </div>
 
         {/* Gradient overlay */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-surface to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t to-transparent" style={{ backgroundImage: dark ? "linear-gradient(to top, rgba(10,10,10,1), transparent)" : "linear-gradient(to top, rgba(255,255,255,1), transparent)" }} />
       </div>
 
       {/* Content */}
       <div className="p-5 md:p-6">
         <div className="flex items-start justify-between mb-2">
-          <h3 className="text-lg font-bold text-foreground group-hover:text-gold transition-colors">
+          <h3 className={`text-lg font-bold group-hover:text-gold transition-colors ${dark ? "text-white" : "text-foreground"}`}>
             {product.name}
           </h3>
           <div className="flex items-center gap-1 text-gold text-sm">
@@ -88,12 +88,12 @@ function ProductCard({ product, onSelect }: { product: Product; onSelect: (p: Pr
           </div>
         </div>
 
-        <p className="text-sm text-zinc-500 mb-4 line-clamp-2">
+        <p className={`text-sm mb-4 line-clamp-2 ${dark ? "text-zinc-400" : "text-zinc-500"}`}>
           {product.description}
         </p>
 
         <div className="flex items-center justify-between">
-          <span className="text-xl font-black text-foreground">
+          <span className={`text-xl font-black ${dark ? "text-white" : "text-foreground"}`}>
             {formatPrice(product.price)}
           </span>
           <button
@@ -242,12 +242,12 @@ function ProductModal({
   );
 }
 
-export default function FeaturedProducts() {
+export default function FeaturedProducts({ dark = false }: { dark?: boolean }) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-  const featured = products.filter(
-    (p) => p.isBestSeller || p.isNew
-  );
+  const featured = products
+    .filter((p) => p.isBestSeller || p.isNew)
+    .slice(0, 4);
 
   return (
     <section id="destacados" className="py-12 md:py-20 relative">
@@ -263,22 +263,23 @@ export default function FeaturedProducts() {
           <span className="text-red-500 font-semibold text-sm tracking-widest uppercase">
             Los favoritos
           </span>
-          <h2 className="text-4xl md:text-6xl font-black text-foreground mt-3 tracking-tight">
+          <h2 className={`text-4xl md:text-6xl font-black mt-3 tracking-tight ${dark ? "text-white" : "text-foreground"}`}>
             Productos{" "}
             <span className="bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">Destacados</span>
           </h2>
-          <p className="text-zinc-500 text-lg mt-4 max-w-xl mx-auto">
+          <p className={`text-lg mt-4 max-w-xl mx-auto ${dark ? "text-zinc-400" : "text-zinc-500"}`}>
             Los pedidos que más se repiten. Probá por qué.
           </p>
         </motion.div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
           {featured.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
               onSelect={setSelectedProduct}
+              dark={dark}
             />
           ))}
         </div>
