@@ -34,7 +34,7 @@ const filters = [
   { id: "picantes", label: "Picantes", icon: null },
 ];
 
-export default function MenuSection() {
+export default function MenuSection({ dark = false }: { dark?: boolean }) {
   const [search, setSearch] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
   const [activeCategory, setActiveCategory] = useState("all");
@@ -70,7 +70,7 @@ export default function MenuSection() {
           <span className="text-blue-500 font-semibold text-sm tracking-widest uppercase">
             Menú Digital
           </span>
-          <h2 className="text-4xl md:text-6xl font-black text-foreground mt-3 tracking-tight">
+          <h2 className={`text-4xl md:text-6xl font-black mt-3 tracking-tight ${dark ? "text-white" : "text-foreground"}`}>
             Explorá el{" "}
             <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">Menú</span>
           </h2>
@@ -90,9 +90,9 @@ export default function MenuSection() {
               placeholder="Buscar productos..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-12 pr-12 py-4 rounded-2xl bg-surface border border-border text-foreground placeholder-zinc-400 focus:outline-none focus:border-gold/50 focus:ring-2 focus:ring-gold/10 transition-all"
+              className={`w-full pl-12 pr-12 py-4 rounded-2xl text-foreground placeholder-zinc-500 focus:outline-none focus:border-gold/50 focus:ring-2 focus:ring-gold/10 transition-all ${dark ? "bg-white/5 border border-white/10" : "bg-surface border border-border"}`}
             />
-            <button className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-xl bg-surface-light hover:bg-surface-lighter transition-colors">
+            <button className={`absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-xl transition-colors ${dark ? "bg-white/10 hover:bg-white/15" : "bg-surface-light hover:bg-surface-lighter"}`}>
               <SlidersHorizontal className="w-4 h-4 text-zinc-500" />
             </button>
           </div>
@@ -113,6 +113,8 @@ export default function MenuSection() {
                 "px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2",
                 activeFilter === f.id
                   ? "bg-gold text-black shadow-lg shadow-gold/20"
+                  : dark
+                  ? "bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10 border border-white/10"
                   : "bg-surface text-zinc-600 hover:text-foreground hover:bg-surface-light border border-border"
               )}
             >
@@ -135,6 +137,8 @@ export default function MenuSection() {
               "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all",
               activeCategory === "all"
                 ? "bg-white text-black"
+                : dark
+                ? "bg-white/5 text-zinc-400 hover:text-white border border-white/10"
                 : "bg-surface text-zinc-500 hover:text-foreground border border-border"
             )}
           >
@@ -148,6 +152,8 @@ export default function MenuSection() {
                 "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all flex items-center gap-2",
                 activeCategory === cat.id
                   ? "bg-white text-black"
+                  : dark
+                  ? "bg-white/5 text-zinc-400 hover:text-white border border-white/10"
                   : "bg-surface text-zinc-500 hover:text-foreground border border-border"
               )}
             >
@@ -166,15 +172,15 @@ export default function MenuSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="group flex items-center gap-4 p-4 rounded-2xl bg-surface border border-border transition-all cursor-pointer"
+              className={`group flex items-center gap-4 p-4 rounded-2xl transition-all cursor-pointer ${dark ? "bg-white/5 border border-white/10" : "bg-surface border border-border"}`}
               style={{ borderColor: `${categoryColorMap[product.category] || "#f5a623"}10` }}
             >
               <FoodBadge emoji={categoryEmoji[product.category] || "🍔"} size="sm" accentColor={categoryColorMap[product.category] || "#f5a623"} />
               <div className="flex-1 min-w-0">
-                <h4 className="font-bold text-foreground text-sm group-hover:text-gold transition-colors truncate">
+                <h4 className={`font-bold text-sm group-hover:text-gold transition-colors truncate ${dark ? "text-white" : "text-foreground"}`}>
                   {product.name}
                 </h4>
-                <p className="text-xs text-zinc-500 truncate mt-0.5">
+                <p className={`text-xs truncate mt-0.5 ${dark ? "text-zinc-500" : "text-zinc-500"}`}>
                   {product.description}
                 </p>
                 <div className="flex items-center gap-2 mt-1">
@@ -182,7 +188,7 @@ export default function MenuSection() {
                     <Star className="w-3 h-3 text-gold fill-gold" />
                     {product.rating}
                   </span>
-                  <span className="text-sm font-bold text-foreground">
+                  <span className={`text-sm font-bold ${dark ? "text-white" : "text-foreground"}`}>
                     {formatPrice(product.price)}
                   </span>
                 </div>

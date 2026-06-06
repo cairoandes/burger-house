@@ -64,11 +64,11 @@ export default function Home() {
 
       <Divider color="blue" />
 
-      {/* Menú - azul - LIGHT */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(180deg, #f5f2ed 0%, #eff6ff 30%, #eff6ff 70%, #f5f2ed 100%)" }}>
-        <div className="absolute top-1/4 right-0 w-[600px] h-[600px] rounded-full blur-3xl" style={{ background: "radial-gradient(circle, rgba(59,130,246,0.12), transparent 55%)", transform: "translateX(40%)" }} />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-3xl" style={{ background: "radial-gradient(circle, rgba(59,130,246,0.08), transparent 55%)", transform: "translate(-20%, 20%)" }} />
-        <MenuSection />
+      {/* Menú - azul - DARK */}
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(180deg, #0a0a0a 0%, #050a18 30%, #050a18 70%, #0a0a0a 100%)" }}>
+        <div className="absolute top-1/4 right-0 w-[600px] h-[600px] rounded-full blur-3xl" style={{ background: "radial-gradient(circle, rgba(59,130,246,0.2), transparent 55%)", transform: "translateX(40%)" }} />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-3xl" style={{ background: "radial-gradient(circle, rgba(59,130,246,0.12), transparent 55%)", transform: "translate(-20%, 20%)" }} />
+        <MenuSection dark />
       </section>
 
       <Divider color="orange" />
