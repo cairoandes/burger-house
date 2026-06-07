@@ -91,10 +91,10 @@ export default function Home() {
 
       <Divider color="gold" />
 
-      {/* Fidelización - dorado - LIGHT */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(180deg, #f5f2ed 0%, #fefce8 30%, #fefce8 70%, #f5f2ed 100%)" }}>
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full blur-3xl" style={{ background: "radial-gradient(circle, rgba(245,158,11,0.12), transparent 55%)", transform: "translate(30%, 30%)" }} />
-        <LoyaltySection />
+      {/* Fidelización - dorado - DARK */}
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(180deg, #0a0a0a 0%, #15100a 30%, #15100a 70%, #0a0a0a 100%)" }}>
+        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full blur-3xl" style={{ background: "radial-gradient(circle, rgba(245,158,11,0.2), transparent 55%)", transform: "translate(30%, 30%)" }} />
+        <LoyaltySection dark />
       </section>
 
       <Divider color="pink" />
